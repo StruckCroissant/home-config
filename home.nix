@@ -77,11 +77,6 @@ in
     "grep" = "grep --color=auto";
   };
 
-  #home.file."${homeDir}/.config/starship.toml" = {
-  #  enable = true;
-  #  source = "${homeDir}/.config/home-manager/config/starship.toml";
-  #};
-  
   programs.home-manager.enable = true;
 
   programs.bash = {
@@ -95,7 +90,7 @@ in
   programs.git = {
     enable = true;
     userName = "StruckCroissant";
-    userEmail = "dakotavaughn5592@gmail.com";
+    userEmail = "32440863+StruckCroissant@users.noreply.github.com";
   };
 
   programs.neovim = {
