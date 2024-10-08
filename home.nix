@@ -182,5 +182,10 @@ in
     enable = true;
     enableBashIntegration = true;
   };
+
+  programs.tmux = {
+    enable = true;
+    mouse = true;
+  };
 }
 
