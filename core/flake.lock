@@ -1,25 +1,8 @@
 {
   "nodes": {
-    "core": {
-      "inputs": {
-        "home-manager": "home-manager",
-        "nixpkgs": "nixpkgs"
-      },
-      "locked": {
-        "lastModified": 1,
-        "narHash": "sha256-2OY0BlxEGq0fWBodsFkd53ZheB1+JHDek87c6YDfQ5k=",
-        "path": "core",
-        "type": "path"
-      },
-      "original": {
-        "path": "core",
-        "type": "path"
-      }
-    },
     "home-manager": {
       "inputs": {
         "nixpkgs": [
-          "core",
           "nixpkgs"
         ]
       },
@@ -56,7 +39,8 @@
     },
     "root": {
       "inputs": {
-        "core": "core"
+        "home-manager": "home-manager",
+        "nixpkgs": "nixpkgs"
       }
     }
   },
