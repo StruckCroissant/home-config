@@ -19,10 +19,10 @@
       stateVersion = "24.05";
       metadata = rec {
         userName = "Dakota Vaughn";
-        username = "dvaughn";
+        username = "struckcroissant";
         homeDirectory = "/home/${username}";
-        host = "DVAUGHN3";
-        email = "dvaughn@xes-inc.com";
+        host = "Hub";
+        email = "32440863+StruckCroissant@users.noreply.github.com";
       };
       home = import ./home.nix { 
         inherit metadata pkgs lib stateVersion config; 
