@@ -1,5 +1,5 @@
 {
-  description = "Home Manager configuration of struckcroissant";
+  description = "Home Manager configuration of Dakota";
 
   inputs = {
     # Specify the source of Home Manager and Nixpkgs.
@@ -14,16 +14,25 @@
     let
       system = "x86_64-linux";
       pkgs = nixpkgs.legacyPackages.${system};
+      lib = pkgs.lib;
+      config = pkgs.config;
+      stateVersion = "24.05";
+      metadata = rec {
+        userName = "Dakota Vaughn";
+        username = "dvaughn";
+        homeDirectory = "/home/${username}";
+        host = "DVAUGHN3";
+        email = "dvaughn@xes-inc.com";
+      };
+      home = import ./home.nix { 
+        inherit metadata pkgs lib stateVersion config; 
+      };
     in {
-      homeConfigurations."struckcroissant" = home-manager.lib.homeManagerConfiguration {
+      home-manager.backupFileExtension = ".bkup";
+      homeConfigurations."${metadata.username}" = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
 
-        # Specify your home configuration modules here, for example,
-        # the path to your home.nix.
-        modules = [ ./home.nix ];
-
-        # Optionally use extraSpecialArgs
-        # to pass through arguments to home.nix
+        modules = [ home ];
       };
     };
 }
