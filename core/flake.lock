@@ -1,25 +1,8 @@
 {
   "nodes": {
-    "core": {
-      "inputs": {
-        "home-manager": "home-manager",
-        "nixpkgs": "nixpkgs"
-      },
-      "locked": {
-        "lastModified": 1728445832,
-        "narHash": "sha256-DNA9C622qS0E1IEAWrxY6VBG2g/PPaxIpKkUqkdMQIw=",
-        "path": "/home/struckcroissant/.config/home-manager/core",
-        "type": "path"
-      },
-      "original": {
-        "path": "/home/struckcroissant/.config/home-manager/core",
-        "type": "path"
-      }
-    },
     "home-manager": {
       "inputs": {
         "nixpkgs": [
-          "core",
           "nixpkgs"
         ]
       },
@@ -56,7 +39,8 @@
     },
     "root": {
       "inputs": {
-        "core": "core"
+        "home-manager": "home-manager",
+        "nixpkgs": "nixpkgs"
       }
     }
   },

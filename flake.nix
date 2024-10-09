@@ -2,37 +2,13 @@
   description = "Home manager base config flake";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/release-24.05";
-    home-manager = {
-      url = "github:nix-community/home-manager/release-24.05";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    core.url = "path:core";
   };
 
-  outputs = { self, nixpkgs, home-manager, ... }:
-    let
-      system = "x86_64-linux";
-      pkgs = nixpkgs.legacyPackages.${system};
-      lib = pkgs.lib;
-      config = pkgs.config;
-      stateVersion = "24.05";
-      metadata = {
-        inherit (import ./variables.nix)
-	  userName
-	  username
-	  homeDirectory
-	  host
-	  email;
-      };
-      home = import ./home.nix { 
-        inherit metadata pkgs lib stateVersion config; 
-      };
-    in {
-      home-manager.backupFileExtension = ".bkup";
-      homeConfigurations."${metadata.username}" = home-manager.lib.homeManagerConfiguration {
-        inherit pkgs;
-
-        modules = [ home ];
-      };
-    };
+   outputs = { self, core, ... }: core.generate {
+     username = "struckcroissant";
+     userName = "Dakota Vaughn";
+     host = "Hub";
+     email = "32440863+StruckCroissant@users.noreply.github.com";
+   };
 }
