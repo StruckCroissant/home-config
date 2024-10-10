@@ -23,6 +23,10 @@ in
     userEmail = "32440863+StruckCroissant@users.noreply.github.com";
   };
 
+  programs.git.delta = {
+    enable = true;
+  };
+
   programs.neovim = {
     enable = true;
     defaultEditor = true;
