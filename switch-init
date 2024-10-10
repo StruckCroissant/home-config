@@ -1,0 +1,5 @@
+#!/bin/bash
+
+set -eu;
+
+home-manager switch -b "orig"
