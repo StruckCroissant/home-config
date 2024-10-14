@@ -29,8 +29,6 @@ in
   
     programs.git = {
       enable = true;
-      userName = "StruckCroissant";
-      userEmail = "32440863+StruckCroissant@users.noreply.github.com";
     };
   
     programs.git.delta = {
