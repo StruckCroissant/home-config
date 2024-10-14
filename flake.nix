@@ -15,6 +15,8 @@
       system = "x86_64-linux";
       pkgs = nixpkgs.legacyPackages.${system};
     in {
+      exports = [ ./programs ./home ];
+
       homeConfigurations."struckcroissant" = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
 

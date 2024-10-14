@@ -1,6 +1,7 @@
 { config, pkgs, lib, ... }:
 let
  cfg = config.programs;
+ concatNewlines = lib.lists.fold (l: r: l + "\n" + r) "";
 in
 {
   options.programs = {
@@ -16,14 +17,20 @@ in
     programs.bash = 
       {
         enable = true;
-        bashrcExtra = let backupExtension = cfg.backupExtension; in 
-          if cfg.backupExtension != null 
-          then ''
-            if [ -f "./.bashrc.${backupExtension}" ]; then
-              source "./.bashrc.${backupExtension}"
-            fi
-          '' 
-          else "";
+        bashrcExtra = 
+	let 
+	 backupExtension = cfg.backupExtension;
+	in concatNewlines [ 
+          (
+	    if cfg.backupExtension != null 
+	    then ''
+              if [ -f "./.bashrc.${backupExtension}" ]; then
+                source "./.bashrc.${backupExtension}"
+              fi
+            '' 
+            else ""
+	  )
+	 ];
         enableCompletion = true;
       };
   
