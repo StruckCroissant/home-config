@@ -22,6 +22,10 @@ in
       pv
       jq
       direnv
+      getopt
+      htop
+    ] ++ [
+      (writeShellScriptBin "hm" (with builtins; (toString (readFile ./hm.sh))))
     ];
   
     home.sessionVariables = {
@@ -29,7 +33,6 @@ in
     };
   
     home.shellAliases = {
-      "hm" = "home-manager";
       "ls" = "ls --color=auto";
       "grep" = "grep --color=auto";
     };
