@@ -14,8 +14,7 @@ in
   config = {
     programs.home-manager.enable = true;
   
-    programs.bash = 
-      {
+    programs.bash = {
         enable = true;
         bashrcExtra = 
 	let 
@@ -48,11 +47,31 @@ in
       vimAlias = true;
       plugins = with pkgs.vimPlugins; [
         lightline-vim
+	fidget-nvim
       ];
       extraConfig = ''
         set rnu
         set number
       '';
+    };
+
+    programs.neovim.coc = {
+      enable = true;
+      settings = {
+        suggest.enablePreview = true;
+	languageserver = {
+	  nix = {
+	    command = "nil";
+	    filetypes = ["nix"];
+	    rootPatterns = ["flake.nix"];
+	    settings = {
+	      nil = {
+		formatting.command = ["nixfmt"];
+	      };
+	    };
+	  };
+	};
+      }; 
     };
   
     programs.starship = {

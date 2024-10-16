@@ -24,6 +24,8 @@ in
       direnv
       getopt
       htop
+      nil
+      nixfmt-rfc-style
     ] ++ [
       (writeShellScriptBin "hm" (with builtins; (toString (readFile ./hm.sh))))
     ];
