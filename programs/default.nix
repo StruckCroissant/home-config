@@ -51,6 +51,8 @@ in
 	nvim-lspconfig
 	nvim-cmp
 	cmp-nvim-lsp
+	vim-tmux-navigator
+	catppuccin-nvim
       ];
       extraConfig = ''
         set rnu
@@ -59,7 +61,7 @@ in
       extraLuaConfig = ''
         require('fidget').setup {}
 	
-        local cmp = require'cmp'
+        local cmp = require('cmp')
 
         cmp.setup({
           snippet = {
@@ -98,6 +100,10 @@ in
 	    },
 	  },
 	}
+	
+	local catppuccin = require("catppuccin")
+	vim.cmd[[colorscheme catppuccin]]
+	vim.cmd[[let g:lightline = {'colorscheme': 'catppuccin'}]]
       '';
     };
 
@@ -181,6 +187,11 @@ in
     programs.tmux = {
       enable = true;
       mouse = true;
+      plugins = with pkgs.tmuxPlugins; [
+      	sensible
+        vim-tmux-navigator
+	catppuccin
+      ];
     };
   };
 }
