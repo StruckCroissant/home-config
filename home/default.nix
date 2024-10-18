@@ -26,6 +26,7 @@ in
       htop
       nil
       nixfmt-rfc-style
+      lua-language-server
     ] ++ [
       (writeShellScriptBin "hm" (with builtins; (toString (readFile ./hm.sh))))
     ];
