@@ -27,6 +27,8 @@ in
       nil
       nixfmt-rfc-style
       lua-language-server
+      nodePackages_latest.bash-language-server
+      shellcheck
     ] ++ [
       (writeShellScriptBin "hm" (with builtins; (toString (readFile ./hm.sh))))
     ];

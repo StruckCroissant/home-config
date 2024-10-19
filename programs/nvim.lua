@@ -1,6 +1,8 @@
 ------------------------
 -- Lua Plugin configs --
 ------------------------
+require("catppuccin")
+
 require('fidget').setup {}
 
 require('lualine').setup {
@@ -80,13 +82,19 @@ lspconfig.lua_ls.setup({
   }
 })
 
-require("catppuccin")
+vim.api.nvim_create_autocmd('FileType', {
+  pattern = 'sh',
+  callback = function()
+    vim.lsp.start({
+      name = 'bash-language-server',
+      cmd = { 'bash-language-server', 'start' },
+    })
+  end,
+})
 
 ------------------------
 -- Native VIM Configs --
 ------------------------
-
 vim.cmd[[colorscheme catppuccin]]
-vim.cmd[[let g:lightline = {'colorscheme': 'catppuccin'}]]
 vim.cmd[[set rnu]]
 vim.cmd[[set number]]
