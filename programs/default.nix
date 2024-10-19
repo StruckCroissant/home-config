@@ -13,7 +13,13 @@ in
 
   config = {
     programs.home-manager.enable = true;
-  
+    
+    home.file.".bashinit-autoload" = {
+      recursive = true;
+      executable = true;
+      enable = true;
+      source = ./autoload-interactive;
+    };
     programs.bash = {
         enable = true;
         bashrcExtra = 
@@ -30,6 +36,12 @@ in
             else ""
 	  )
 	 ];
+	initExtra = ''
+	  files=$(find "./.bashinit-autoload" -type f,l)
+	  for file in $files; do
+	    source "$file"
+	  done
+	'';
         enableCompletion = true;
       };
   

@@ -30,7 +30,7 @@ in
       nodePackages_latest.bash-language-server
       shellcheck
     ] ++ [
-      (writeShellScriptBin "hm" (with builtins; (toString (readFile ./hm.sh))))
+      (writeShellScriptBin "hm" (with builtins; (toString (readFile ./commands/hm.sh))))
     ];
   
     home.sessionVariables = {
