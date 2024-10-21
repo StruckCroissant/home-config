@@ -88,6 +88,7 @@ in
           "$rust"
           "$golang"
           "$php"
+          "[](fg:#212736 bg:#1d2230)"
           "\n$character"
         ];
         directory = {
