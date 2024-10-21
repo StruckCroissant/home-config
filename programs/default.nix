@@ -76,8 +76,8 @@ in
       enableBashIntegration = true;
       settings = {
         format = lib.concatStrings [
-          "[░▒▓](#a3aed2)"
-          "[  ](bg:#a3aed2 fg:#090c0c)"
+	  "[ ](bg:#a3aed2 fg:#090c0c)"
+          "[ $username@$hostname ](bold bg:#a3aed2 fg:#090c0c)"
           "[](bg:#769ff0 fg:#a3aed2)"
           "$directory"
           "[](fg:#769ff0 bg:#394260)"
@@ -88,9 +88,6 @@ in
           "$rust"
           "$golang"
           "$php"
-          "[](fg:#212736 bg:#1d2230)"
-          "$time"
-          "[ ](fg:#1d2230)"
           "\n$character"
         ];
         directory = {
@@ -105,6 +102,14 @@ in
           "Music" = " ";
           "Pictures" = " ";
         };
+	hostname = {
+	  format = "$hostname";
+	  ssh_only = false;
+	};
+	username = {
+	  format = "$user";
+	  show_always = true;
+	};
         git_branch = {
           symbol = "";
           style = "bg:#394260";
@@ -116,8 +121,8 @@ in
         };
         nodejs = {
           symbol = "";
-	        style = "bg:#212736";
-	        format = "[[ $symbol ($version) ](fg:#769ff0 bg:#212736)]($style)";
+          style = "bg:#212736";
+          format = "[[ $symbol ($version) ](fg:#769ff0 bg:#212736)]($style)";
         };
         rust = {
           symbol = "";
