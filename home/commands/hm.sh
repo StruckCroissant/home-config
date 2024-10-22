@@ -27,7 +27,6 @@ done
 function pull() {
   cd "$HOME_CONFIG_DIR"
   echo "Pulling config file..."
-  git pull
   nix flake update
   cd "$BASE_WORKING_DIR"
 }

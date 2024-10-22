@@ -21,8 +21,6 @@ if [ -f "$SSH_ENV" ]; then
     #ps $SSH_AGENT_PID doesn't work under Cygwin
     if ! ps -ef | grep "$SSH_AGENT_PID" | grep ssh-agent$ >/dev/null; then
         start_agent
-    else
-	echo "SSH agent already set. Skipping init..."
     fi
 else
     start_agent

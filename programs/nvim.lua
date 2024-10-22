@@ -1,7 +1,9 @@
 ------------------------
 -- Lua Plugin configs --
 ------------------------
-require("catppuccin")
+require("catppuccin").setup({
+  flavour = "macchiato",
+})
 
 require('fidget').setup {}
 
