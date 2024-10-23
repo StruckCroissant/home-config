@@ -29,6 +29,8 @@ in
       lua-language-server
       nodePackages_latest.bash-language-server
       shellcheck
+      ripgrep
+      fd
     ] ++ [
       (writeShellScriptBin "hm" (with builtins; (toString (readFile ./commands/hm.sh))))
     ];

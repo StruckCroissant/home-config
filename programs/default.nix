@@ -21,29 +21,29 @@ in
       source = ./autoload-interactive;
     };
     programs.bash = {
-        enable = true;
-        bashrcExtra = 
-	let
-	 backupExtension = cfg.backupExtension;
-	in concatNewlines [ 
-          (
-	    if cfg.backupExtension != null 
-	    then ''
-              if [ -f "./.bashrc.${backupExtension}" ]; then
-                source "./.bashrc.${backupExtension}"
-              fi
-            '' 
-            else ""
-	  )
-	 ];
-	initExtra = ''
-	  files=$(find "./.bashinit-autoload" -type f,l)
-	  for file in $files; do
-	    source "$file"
-	  done
-	'';
-        enableCompletion = true;
-      };
+      enable = true;
+      bashrcExtra = 
+      let
+       backupExtension = cfg.backupExtension;
+      in concatNewlines [ 
+        (
+          if cfg.backupExtension != null 
+          then ''
+            if [ -f "./.bashrc.${backupExtension}" ]; then
+              source "./.bashrc.${backupExtension}"
+            fi
+          '' 
+          else ""
+        )
+       ];
+      initExtra = ''
+        files=$(find "./.bashinit-autoload" -type f,l)
+        for file in $files; do
+          source "$file"
+        done
+      '';
+      enableCompletion = true;
+    };
   
     programs.git = {
       enable = true;
@@ -67,6 +67,9 @@ in
 	lualine-nvim
 	luasnip
 	cmp_luasnip
+	telescope-nvim
+	plenary-nvim
+	nvim-treesitter.withAllGrammars
       ];
       extraLuaConfig = (builtins.readFile ./nvim.lua); 
     };
