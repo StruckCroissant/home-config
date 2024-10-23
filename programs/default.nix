@@ -1,7 +1,12 @@
-{ config, pkgs, lib, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 let
- cfg = config.programs;
- concatNewlines = lib.lists.fold (l: r: l + "\n" + r) "";
+  cfg = config.programs;
+  concatNewlines = lib.lists.fold (l: r: l + "\n" + r) "";
 in
 {
   options.programs = {
@@ -13,7 +18,7 @@ in
 
   config = {
     programs.home-manager.enable = true;
-    
+
     home.file.".bashinit-autoload" = {
       recursive = true;
       executable = true;
@@ -22,20 +27,22 @@ in
     };
     programs.bash = {
       enable = true;
-      bashrcExtra = 
-      let
-       backupExtension = cfg.backupExtension;
-      in concatNewlines [ 
-        (
-          if cfg.backupExtension != null 
-          then ''
-            if [ -f "./.bashrc.${backupExtension}" ]; then
-              source "./.bashrc.${backupExtension}"
-            fi
-          '' 
-          else ""
-        )
-       ];
+      bashrcExtra =
+        let
+          backupExtension = cfg.backupExtension;
+        in
+        concatNewlines [
+          (
+            if cfg.backupExtension != null then
+              ''
+                if [ -f "./.bashrc.${backupExtension}" ]; then
+                  source "./.bashrc.${backupExtension}"
+                fi
+              ''
+            else
+              ""
+          )
+        ];
       initExtra = ''
         files=$(find "./.bashinit-autoload" -type f,l)
         for file in $files; do
@@ -44,34 +51,34 @@ in
       '';
       enableCompletion = true;
     };
-  
+
     programs.git = {
       enable = true;
     };
-  
+
     programs.git.delta = {
       enable = true;
     };
-  
+
     programs.neovim = {
       enable = true;
       defaultEditor = true;
       vimAlias = true;
       plugins = with pkgs.vimPlugins; [
-	fidget-nvim
-	nvim-lspconfig
-	nvim-cmp
-	cmp-nvim-lsp
-	vim-tmux-navigator
-	catppuccin-nvim
-	lualine-nvim
-	luasnip
-	cmp_luasnip
-	telescope-nvim
-	plenary-nvim
-	nvim-treesitter.withAllGrammars
+        fidget-nvim
+        nvim-lspconfig
+        nvim-cmp
+        cmp-nvim-lsp
+        vim-tmux-navigator
+        catppuccin-nvim
+        lualine-nvim
+        luasnip
+        cmp_luasnip
+        telescope-nvim
+        plenary-nvim
+        nvim-treesitter.withAllGrammars
       ];
-      extraLuaConfig = (builtins.readFile ./nvim.lua); 
+      extraLuaConfig = (builtins.readFile ./nvim.lua);
     };
 
     programs.starship = {
@@ -105,14 +112,14 @@ in
           "Music" = " ";
           "Pictures" = " ";
         };
-	hostname = {
-	  format = "$hostname";
-	  ssh_only = false;
-	};
-	username = {
-	  format = "$user";
-	  show_always = true;
-	};
+        hostname = {
+          format = "$hostname";
+          ssh_only = false;
+        };
+        username = {
+          format = "$user";
+          show_always = true;
+        };
         git_branch = {
           symbol = "";
           style = "bg:#394260";
@@ -150,19 +157,19 @@ in
         };
       };
     };
-  
+
     programs.dircolors = {
       enable = true;
       enableBashIntegration = true;
     };
-  
+
     programs.tmux = {
       enable = true;
       mouse = true;
       plugins = with pkgs.tmuxPlugins; [
-      	sensible
+        sensible
         vim-tmux-navigator
-	catppuccin
+        catppuccin
       ];
     };
   };

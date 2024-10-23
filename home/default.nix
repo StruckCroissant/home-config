@@ -1,6 +1,11 @@
-{ config, pkgs, lib, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 let
- cfg = config.home;
+  cfg = config.home;
 in
 {
   options.home = {
@@ -11,34 +16,33 @@ in
   };
 
   config = {
-    home.homeDirectory = if cfg.homeDir != null 
-      then cfg.homeDir 
-      else "/home/${config.home.username}";
-  
-    home.stateVersion = "24.05"; 
-  
-    home.packages = with pkgs; [
-      nerdfonts
-      pv
-      jq
-      direnv
-      getopt
-      htop
-      nil
-      nixfmt-rfc-style
-      lua-language-server
-      nodePackages_latest.bash-language-server
-      shellcheck
-      ripgrep
-      fd
-    ] ++ [
-      (writeShellScriptBin "hm" (with builtins; (toString (readFile ./commands/hm.sh))))
-    ];
-  
+    home.homeDirectory = if cfg.homeDir != null then cfg.homeDir else "/home/${config.home.username}";
+
+    home.stateVersion = "24.05";
+
+    home.packages =
+      with pkgs;
+      [
+        nerdfonts
+        pv
+        jq
+        direnv
+        getopt
+        htop
+        nil
+        nixfmt-rfc-style
+        lua-language-server
+        nodePackages_latest.bash-language-server
+        shellcheck
+        ripgrep
+        fd
+      ]
+      ++ [ (writeShellScriptBin "hm" (with builtins; (toString (readFile ./commands/hm.sh)))) ];
+
     home.sessionVariables = {
       EDITOR = "nvim";
     };
-  
+
     home.shellAliases = {
       "ls" = "ls --color=auto";
       "grep" = "grep --color=auto";
