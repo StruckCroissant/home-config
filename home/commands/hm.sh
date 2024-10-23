@@ -4,6 +4,7 @@ set -eu;
 
 BASE_WORKING_DIR="$(pwd)"
 HOME_CONFIG_DIR="${HOME}/.config/home-manager"
+HOME_CONFIG_FLAKE_NAME="${HOME_CONFIG_FLAKE_NAME:-core-config}"
 
 PASSTHROUGH_ARGS=()
 PULL=0
@@ -27,7 +28,7 @@ done
 function pull() {
   cd "$HOME_CONFIG_DIR"
   echo "Pulling config file..."
-  nix flake update
+  nix flake update "$HOME_CONFIG_FLAKE_NAME"
   cd "$BASE_WORKING_DIR"
 }
 
