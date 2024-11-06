@@ -44,7 +44,7 @@ in
           )
         ];
       initExtra = ''
-        files=$(find "./.bashinit-autoload" -type f,l)
+        files=$(find "$HOME/.bashinit-autoload" -type f,l)
         for file in $files; do
           source "$file"
         done
