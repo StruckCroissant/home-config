@@ -35,8 +35,8 @@ in
           (
             if cfg.backupExtension != null then
               ''
-                if [ -f "./.bashrc.${backupExtension}" ]; then
-                  source "./.bashrc.${backupExtension}"
+                if [ -f "$HOME/.bashrc.${backupExtension}" ]; then
+                  source "$HOME/.bashrc.${backupExtension}"
                 fi
               ''
             else
