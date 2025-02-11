@@ -37,6 +37,7 @@ in
         ripgrep
         fd
 	podman
+	podman-compose
 	su
       ]
       ++ [ (writeShellScriptBin "hm" (with builtins; (toString (readFile ./commands/hm.sh)))) ];

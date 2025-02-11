@@ -1,8 +1,9 @@
 {
-  config,
   services,
   pkgs,
   ...
 }: {
-    options.services.podman.enable = true;
+  config = {
+    services.podman.enable = true;
+  };
 }
