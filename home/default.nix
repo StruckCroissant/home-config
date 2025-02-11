@@ -36,7 +36,8 @@ in
         shellcheck
         ripgrep
         fd
-	docker_26
+	podman
+	su
       ]
       ++ [ (writeShellScriptBin "hm" (with builtins; (toString (readFile ./commands/hm.sh)))) ];
 
