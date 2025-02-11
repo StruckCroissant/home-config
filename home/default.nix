@@ -36,6 +36,7 @@ in
         shellcheck
         ripgrep
         fd
+	docker_26
       ]
       ++ [ (writeShellScriptBin "hm" (with builtins; (toString (readFile ./commands/hm.sh)))) ];
 
