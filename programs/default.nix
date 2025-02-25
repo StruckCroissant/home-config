@@ -48,6 +48,8 @@ in
         for file in $files; do
           source "$file"
         done
+
+	export SUDO_EDITOR=$(which nvim)
       '';
       enableCompletion = true;
     };
