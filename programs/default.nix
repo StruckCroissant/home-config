@@ -56,6 +56,12 @@ in
 
     programs.git = {
       enable = true;
+
+      extraConfig = {
+        rebase = {
+          instructionFormat = "%s (A: %an, C: %cn)";
+        };
+      };
     };
 
     programs.git.delta = {
