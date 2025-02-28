@@ -59,7 +59,7 @@ in
 
       extraConfig = {
         rebase = {
-          instructionFormat = "%s (A: %an, C: %cn)";
+          instructionFormat = "%s (A: %an, C: %cn)%d";
         };
       };
     };
