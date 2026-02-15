@@ -18,12 +18,11 @@ in
   config = {
     home.homeDirectory = if cfg.homeDir != null then cfg.homeDir else "/home/${config.home.username}";
 
-    home.stateVersion = "24.05";
+    home.stateVersion = "25.11";
 
     home.packages =
       with pkgs;
       [
-        nerdfonts
         pv
         jq
         direnv
@@ -36,7 +35,7 @@ in
         shellcheck
         ripgrep
         fd
-	docker_26
+	docker_28
       ]
       ++ [ (writeShellScriptBin "hm" (with builtins; (toString (readFile ./commands/hm.sh)))) ];
 

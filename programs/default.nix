@@ -57,14 +57,14 @@ in
     programs.git = {
       enable = true;
 
-      extraConfig = {
+      settings = {
         rebase = {
           instructionFormat = "%s (A: %an, C: %cn)%d";
         };
       };
     };
 
-    programs.git.delta = {
+    programs.delta = {
       enable = true;
     };
 

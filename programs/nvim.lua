@@ -44,8 +44,9 @@ cmp.setup({
 
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
-local lspconfig = require('lspconfig');
-lspconfig.nil_ls.setup({
+
+vim.lsp.enable({ "nil_ls", "lua_ls" })
+vim.lsp.config['nil_ls'] = {
   capabilities = capabilities,
   autostart = true,
   settings = {
@@ -55,8 +56,8 @@ lspconfig.nil_ls.setup({
       },
     },
   },
-})
-lspconfig.lua_ls.setup({
+}
+vim.lsp.config['lua_ls'] = {
   on_init = function(client)
     if client.workspace_folders then
       local path = client.workspace_folders[1].name
@@ -84,7 +85,7 @@ lspconfig.lua_ls.setup({
       }
     }
   }
-})
+}
 
 require('nvim-treesitter.configs').setup({
   highlight = {
