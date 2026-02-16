@@ -35,7 +35,8 @@ in
         shellcheck
         ripgrep
         fd
-	docker_28
+	      docker_28
+        nerd-fonts.hack
       ]
       ++ [ (writeShellScriptBin "hm" (with builtins; (toString (readFile ./commands/hm.sh)))) ];
 
