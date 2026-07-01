@@ -31,7 +31,7 @@ in
         nil
         nixfmt-rfc-style
         lua-language-server
-        nodePackages_latest.bash-language-server
+        bash-language-server
         shellcheck
         ripgrep
         fd
