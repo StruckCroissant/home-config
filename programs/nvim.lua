@@ -87,10 +87,13 @@ vim.lsp.config['lua_ls'] = {
   }
 }
 
-require('nvim-treesitter.configs').setup({
-  highlight = {
-    enable = true,
-  },
+-- nvim-treesitter's `main` branch (shipped in nixpkgs 26.05) dropped the
+-- `nvim-treesitter.configs` module and its `.setup{}` API. Parsers come from
+-- `nvim-treesitter.withAllGrammars`; enable highlighting per buffer instead.
+vim.api.nvim_create_autocmd('FileType', {
+  callback = function(args)
+    pcall(vim.treesitter.start, args.buf)
+  end,
 })
 
 local telescope = require("telescope.builtin")
