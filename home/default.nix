@@ -29,7 +29,7 @@ in
         getopt
         htop
         nil
-        nixfmt-rfc-style
+        nixfmt
         lua-language-server
         bash-language-server
         shellcheck

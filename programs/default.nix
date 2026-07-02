@@ -6,7 +6,7 @@
 }:
 let
   cfg = config.programs;
-  concatNewlines = lib.lists.fold (l: r: l + "\n" + r) "";
+  concatNewlines = lib.lists.foldr (l: r: l + "\n" + r) "";
 in
 {
   options.programs = {
@@ -72,6 +72,10 @@ in
       enable = true;
       defaultEditor = true;
       vimAlias = true;
+      # Keep the Ruby/Python3 providers on: nvim.lua sets ruby_host_prog and
+      # python3_host_prog. nixpkgs 26.05 flipped these defaults to false.
+      withRuby = true;
+      withPython3 = true;
       plugins = with pkgs.vimPlugins; [
         fidget-nvim
         nvim-lspconfig
@@ -86,7 +90,7 @@ in
         plenary-nvim
         nvim-treesitter.withAllGrammars
       ];
-      extraLuaConfig = (builtins.readFile ./nvim.lua);
+      initLua = (builtins.readFile ./nvim.lua);
     };
 
     programs.starship = {
