@@ -149,6 +149,8 @@ in
       plugins = with pkgs.tmuxPlugins; [
         sensible
         vim-tmux-navigator
+        # prefix+F menu: manage sessions/windows/panes/commands/keybindings.
+        tmux-fzf
         {
           plugin = catppuccin;
           extraConfig = ''
@@ -173,7 +175,14 @@ in
         bind -T copy-mode-vi    C-WheelDownPane send-keys -X halfpage-down
         bind -T copy-mode-emacs C-WheelUpPane   send-keys -X halfpage-up
         bind -T copy-mode-emacs C-WheelDownPane send-keys -X halfpage-down
+
+        # prefix + o -> floating sesh palette (live sessions + zoxide dirs + tmuxinator projects).
+        # Rebinds the rarely-used default rotate-pane; pane movement is handled by vim-tmux-navigator.
+        bind -N "sesh palette" o display-popup -E -w 60% -h 60% "sesh connect \"$(sesh list --icons | fzf --reverse --ansi)\""
       '';
     };
+
+    programs.fzf.enable = true;    # picker used by the sesh palette
+    programs.zoxide.enable = true; # sesh's "jump to any dir" source
   };
 }

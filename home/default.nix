@@ -48,6 +48,7 @@ in
         yq
         tree
         glow
+        sesh
 
         # JS/TS dev tooling
         typescript
