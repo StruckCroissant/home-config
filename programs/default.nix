@@ -61,6 +61,8 @@ in
         rebase = {
           instructionFormat = "%s (A: %an, C: %cn)%d";
         };
+        rerere.enabled = true;
+        push.autoSetupRemote = true;
       };
     };
 
@@ -95,77 +97,43 @@ in
 
     programs.starship = {
       enable = true;
+      enableZshIntegration = true;
+      enableFishIntegration = true;
       enableBashIntegration = true;
+
       settings = {
-        format = lib.concatStrings [
-          "[  $username@$hostname ](bold bg:#a3aed2 fg:#090c0c)"
-          "[](bg:#769ff0 fg:#a3aed2)"
-          "$directory"
-          "[](fg:#769ff0 bg:#394260)"
-          "$git_branch"
-          "$git_status"
-          "[](fg:#394260 bg:#212736)"
-          "$nodejs"
-          "$rust"
-          "$golang"
-          "$php"
-          "[](fg:#212736)"
-          "\n$character"
-        ];
-        directory = {
-          style = "fg:#e3e5e5 bg:#769ff0";
-          format = "[ $path ]($style)";
-          truncation_length = 3;
-          truncation_symbol = "…/";
+        # The main prompt format
+        format = "[┌─](bold white)$username$directory$git_branch$git_status$cmd_duration\n$character";
+
+        # The L-shaped connector for the multiline prompt
+        character = {
+          success_symbol = "[└─>](bold white)";
+          error_symbol = "[└─>](bold red)";
         };
-        directory.substitutions = {
-          "Documents" = "󰈙 ";
-          "Downloads" = " ";
-          "Music" = " ";
-          "Pictures" = " ";
+
+        # Command duration config ("took 8s591ms")
+        cmd_duration = {
+          min_time = 500;
+          format = "took [$duration](bold yellow) ";
         };
-        hostname = {
-          format = "$hostname";
-          ssh_only = false;
-        };
+
         username = {
-          format = "$user";
           show_always = true;
+          format = "[$user](bold yellow) ";
         };
+
+        hostname = {
+          ssh_only = false;
+          format = "on [$hostname](bold pink) ";
+        };
+
+        directory = {
+          format = "in [$path](bold cyan) ";
+        };
+
         git_branch = {
-          symbol = "";
-          style = "bg:#394260";
-          format = "[[ $symbol $branch ](fg:#769ff0 bg:#394260)]($style)";
-        };
-        git_status = {
-          style = "bg:#394260";
-          format = "[[($all_status$ahead_behind )](fg:#769ff0 bg:#394260)]($style)";
-        };
-        nodejs = {
-          symbol = "";
-          style = "bg:#212736";
-          format = "[[ $symbol ($version) ](fg:#769ff0 bg:#212736)]($style)";
-        };
-        rust = {
-          symbol = "";
-          style = "bg:#212736";
-          format = "[[ $symbol ($version) ](fg:#769ff0 bg:#212736)]($style)";
-        };
-        golang = {
-          symbol = "";
-          style = "bg:#212736";
-          format = "[[ $symbol ($version) ](fg:#769ff0 bg:#212736)]($style)";
-        };
-        php = {
-          symbol = "";
-          style = "bg:#212736";
-          format = "[[ $symbol ($version) ](fg:#769ff0 bg:#212736)]($style)";
-        };
-        time = {
-          disabled = false;
-          time_format = "%R"; # Hour:Minute Format
-          style = "bg:#1d2230";
-          format = "[[  $time ](fg:#a0a9cb bg:#1d2230)]($style)";
+          symbol = "🌱 ";
+          format = "on [$symbol$branch](bold purple) ";
         };
       };
     };
@@ -197,6 +165,15 @@ in
           '';
         }
       ];
+      extraConfig = ''
+        bind -n WheelUpPane if-shell -F -t = "#{mouse_any_flag}" "send-keys -M" "if -Ft= '#{pane_in_mode}' 'send-keys -M' 'select-pane -t=; copy-mode -e; send-keys -M'"
+        bind -n WheelDownPane select-pane -t= \; send-keys -M
+        bind -n C-WheelUpPane select-pane -t= \; copy-mode -e \; send-keys -M
+        bind -T copy-mode-vi    C-WheelUpPane   send-keys -X halfpage-up
+        bind -T copy-mode-vi    C-WheelDownPane send-keys -X halfpage-down
+        bind -T copy-mode-emacs C-WheelUpPane   send-keys -X halfpage-up
+        bind -T copy-mode-emacs C-WheelDownPane send-keys -X halfpage-down
+      '';
     };
   };
 }

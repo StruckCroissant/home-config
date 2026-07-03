@@ -20,6 +20,10 @@ in
 
     home.stateVersion = "25.11";
 
+    nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
+      "claude-code"
+    ];
+
     home.packages =
       with pkgs;
       [
@@ -37,6 +41,22 @@ in
         fd
 	      docker_29
         nerd-fonts.hack
+
+        # CLI utilities
+        bat
+        less
+        yq
+        tree
+        glow
+
+        # JS/TS dev tooling
+        typescript
+        typescript-language-server
+        vue-language-server
+        vsce
+        devcontainer
+
+        claude-code
       ]
       ++ [ (writeShellScriptBin "hm" (with builtins; (toString (readFile ./commands/hm.sh)))) ];
 
