@@ -22,18 +22,15 @@ function start_agent {
     /usr/bin/ssh-add
 }
 
-# Source SSH settings, if applicable
-
 if [ -f "$SSH_ENV" ]; then
     . "$SSH_ENV" >/dev/null
-    #ps $SSH_AGENT_PID doesn't work under Cygwin
-    if ! ps -ef | grep "$SSH_AGENT_PID" | grep ssh-agent$ >/dev/null; then
-        start_agent
-    elif ! /usr/bin/ssh-add -l >/dev/null 2>&1; then
-        # Agent alive but keys expired (-t above) — top up so shells and
-        # anything sharing the socket get working auth again.
-        /usr/bin/ssh-add
-    fi
-else
-    start_agent
 fi
+
+# Probe the agent through the socket rather than parsing ps (which broke
+# once the agent gained command-line args): 0 = keys loaded, 1 = alive but
+# empty (expired or never added) — top up, 2 = unreachable — start fresh.
+/usr/bin/ssh-add -l >/dev/null 2>&1
+case $? in
+    1) /usr/bin/ssh-add ;;
+    2) start_agent ;;
+esac
