@@ -56,7 +56,6 @@ in
 
     programs.git = {
       enable = true;
-
       settings = {
         rebase = {
           instructionFormat = "%s (A: %an, C: %cn)%d";
@@ -68,6 +67,7 @@ in
 
     programs.delta = {
       enable = true;
+      enableGitIntegration = true;
     };
 
     programs.neovim = {
