@@ -47,6 +47,13 @@ modules = [ ./home.nix ] ++ inputs.core-config.exports;
 values (`home.username`, git identity, extra packages) and can override base
 values via the normal module system.
 
+## Trying the base config
+
+`./test-config.sh` opens a shell in a container as the `default` user with the
+config applied, to see what it produces. The repo is mounted at
+`~/.config/home-manager` inside, so `hm switch` there picks up edits. The first
+run downloads the closure; later runs take about a second.
+
 ## Building this repo's own config
 
 This flake also defines a standalone config for the maintainer:
