@@ -144,9 +144,20 @@ in
       enableBashIntegration = true;
     };
 
-    programs.tmux = {
+    programs.tmux = let 
+      tmux36 = pkgs.tmux.overrideAttrs (oldAttrs: {
+        version = "3.6";
+        src = pkgs.fetchFromGitHub {
+          owner = "tmux";
+          repo = "tmux";
+          rev = "3.6"; 
+          hash = "sha256-jIHnwidzqt+uDDFz8UVHihTgHJybbVg3pQvzlMzOXPE=";
+        };
+      });
+    in {
       enable = true;
       mouse = true;
+      package = tmux36;
       plugins = with pkgs.tmuxPlugins; [
         sensible
         vim-tmux-navigator
