@@ -97,10 +97,10 @@ in
     };
 
     programs.starship = {
-      enable = true;
+      enable = false;
       enableZshIntegration = true;
       enableFishIntegration = true;
-      enableBashIntegration = true;
+      enableBashIntegration = false;
 
       settings = {
         # The main prompt format
